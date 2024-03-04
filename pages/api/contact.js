@@ -25,9 +25,10 @@ async function handler(req, res) {
     let client;
 
     try {
-      client = await MongoClient.connect(
-        'mongodb+srv://Chaitanya:8j4vHwGeKFDMXl13@chaitanya-cluster.h1wjxoa.mongodb.net/my-site?retryWrites=true&w=majority'
-      );
+      client = await MongoClient.connect(process.env.MONGO_URL,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
     } catch (error) {
       res.status(500).json({ message: 'Could not connect to database.' });
       return;
